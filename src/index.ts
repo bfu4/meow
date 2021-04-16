@@ -1,15 +1,15 @@
 import "dotenv/config";
 
-import {Client, EmbedField} from "discord.js";
-import {aliases, commands} from "./commands";
-import {StandardEmbed} from "./structs/standard-embed";
-import {prisma} from "./services/prisma";
-import {redis} from "./services/redis";
-import {isDev} from "./constants";
+import { Client, EmbedField } from "discord.js";
+import { aliases, commands } from "./commands";
+import { StandardEmbed } from "./structs/standard-embed";
+import { isDev } from "./constants";
 import signale from "signale";
 
 const client = new Client();
-const prefix = process.env.PREFIX || "--";
+const prefix = process.env.PREFIX || "^";
+
+client.login("ODMyNjUwMzYzMDg4Nzk3Njk2.YHm4FA.3EdSj5MOEbldxzriw4PY8ezKUU0");
 
 client.on("ready", () => {
   signale.info("Environment:", isDev ? "dev" : "prod");
@@ -74,12 +74,4 @@ client.on("message", async message => {
   } catch (e) {
     await message.reply(`⚠ ${e.message}`);
   }
-});
-
-prisma.$connect().then(async () => {
-  signale.info("Connected to Database");
-  await redis.connect();
-  signale.info("Connected to Redis");
-  await client.login(process.env.DISCORD_TOKEN);
-  signale.info("Connected to Discord");
 });
