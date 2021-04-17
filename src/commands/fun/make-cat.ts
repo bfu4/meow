@@ -57,10 +57,11 @@ export const makeCat : Command = {
 
       await gu.roles.add(role);
 
-      const canHaveNick = ((gu.nickname !== null ? gu.nickname : gu.displayName) + "\\s(cat)").length <= 32;
-      if (canHaveNick && gu.displayName.indexOf("(cat)") === -1) await gu.setNickname("💖" + gu.displayName + " (cat)");
-
     }
+
+    const canHaveNick = ((gu.nickname !== null ? gu.nickname : gu.displayName) + "\\s(cat)").length <= 32;
+    if (canHaveNick && gu.displayName.indexOf("(cat)") === -1) await gu.setNickname("💖" + gu.displayName + " (cat)");
+
 
     const msg = await message.channel.send(embed);
     reactions.forEach((reaction) => msg.react(reaction).catch(() => null));
