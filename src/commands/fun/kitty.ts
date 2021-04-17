@@ -28,7 +28,8 @@ export const kitty : Command = {
       .setImage(await res.file)
       .setFooter("made with <3 by meow");
 
-    await message.channel.send(embed);
+    const msg = await message.channel.send(embed);
+    reactions.forEach((reaction) => msg.react(reaction).catch(() => null));
   }
 
 }

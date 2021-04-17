@@ -1,6 +1,5 @@
 import {Command} from "../../types/command";
 import {Message, MessageEmbed} from "discord.js";
-import fetch from "node-fetch";
 import {colors, reactions} from "./kitty";
 
 export const makeCat : Command = {
@@ -64,7 +63,7 @@ export const makeCat : Command = {
     }
 
     const msg = await message.channel.send(embed);
-    reactions.forEach((reaction) => msg.react(reaction));
+    reactions.forEach((reaction) => msg.react(reaction).catch(() => null));
   }
 
 }
