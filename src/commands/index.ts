@@ -5,12 +5,13 @@ import {kitty} from "./fun/kitty";
 import {makeCat} from "./fun/make-cat";
 import {eth} from "./fun/eth";
 import {nano} from "./fun/nano";
+import {foaas} from "./util/foaas";
 
 /**
  * An array of all commands available for the bot.
  * To register a command, all you have to do is place it in this array
  */
-export const commands : Command[] = [ ping, kitty, makeCat, eth, nano ];
+export const commands : Command[] = [ ping, kitty, makeCat, foaas ];
 
 const commandsWithAliases = commands.reduce((all, command) => {
   // Dedupe aliases

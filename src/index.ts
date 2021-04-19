@@ -5,13 +5,15 @@ import { aliases, commands } from "./commands";
 import { StandardEmbed } from "./structs/standard-embed";
 import { isDev } from "./constants";
 import signale from "signale";
+import {Crypto, getCryptoFromString} from "./types/crypto";
+import {cryptoCommand} from "./commands/fun/crypto";
 
 const client = new Client();
 const prefix = process.env.PREFIX || "^";
 
 client.login("ODMyNjUwMzYzMDg4Nzk3Njk2.YHm4FA.3EdSj5MOEbldxzriw4PY8ezKUU0");
 
-client.on("ready", () => {
+client.on("ready", async () => {
   signale.info("Environment:", isDev ? "dev" : "prod");
   signale.success("Ready as", client.user?.tag);
 });
@@ -63,7 +65,13 @@ client.on("message", async message => {
     const command = aliases.get(commandName);
 
     if (!command) {
-      return message.reply("⚠ Unknown Command");
+      const crypto : Crypto = getCryptoFromString(commandName);
+      if (!crypto || crypto.length === 0) {
+        return message.reply("⚠ Unknown Command");
+      } else {
+        await cryptoCommand.run(message, args);
+        return;
+      }
     }
 
     const inhibitors = Array.isArray(command.inhibitors) ? command.inhibitors : [ command.inhibitors ];

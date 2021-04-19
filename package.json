@@ -20,10 +20,12 @@
   },
   "dependencies": {
     "@prisma/client": "^2.19.0",
+    "@types/jquery": "^3.5.5",
     "current-currency": "^1.6.2",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "ioredis": "^4.24.2",
+    "jquery": "^3.6.0",
     "node-fetch": "^2.6.1",
     "signale": "^1.4.0",
     "zod": "^1.11.11"
