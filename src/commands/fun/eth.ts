@@ -6,7 +6,7 @@ import {convert} from "current-currency";
 export const eth : Command = {
 
   aliases: [ "eth", "e", "sex" ],
-  description: "send a kitty :3",
+  description: "eth price",
   inhibitors: [],
 
   async run(message : Message) {

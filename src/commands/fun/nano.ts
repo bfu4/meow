@@ -1,12 +1,11 @@
 import {Command} from "../../types/command";
 import {Message, MessageEmbed} from "discord.js";
 import {colors} from "./kitty";
-import {convert} from "current-currency";
 
 export const nano : Command = {
 
   aliases: [ "nano", "n" ],
-  description: "send a kitty :3",
+  description: "nano price",
   inhibitors: [],
 
   async run(message : Message) {
