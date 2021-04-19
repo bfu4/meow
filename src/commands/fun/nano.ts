@@ -1,4 +1,5 @@
 import {Command} from "../../types/command";
+import fetch from "node-fetch";
 import {Message, MessageEmbed} from "discord.js";
 import {colors} from "./kitty";
 
