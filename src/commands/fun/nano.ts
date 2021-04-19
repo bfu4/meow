@@ -3,23 +3,23 @@ import {Message, MessageEmbed} from "discord.js";
 import {colors} from "./kitty";
 import {convert} from "current-currency";
 
-export const eth : Command = {
+export const nano : Command = {
 
-  aliases: [ "eth", "e", "sex" ],
+  aliases: [ "nano", "n" ],
   description: "send a kitty :3",
   inhibitors: [],
 
   async run(message : Message) {
     const colorIndex = Math.floor(Math.random() * colors.length)
-    const priceUSD = await convert("ETH",1,  "USD");
-    const priceBTC = await convert("ETH", 1, "BTC");
+    const dat = await fetch(`https://api.coinbase.com/v2/exchange-rates?currency=NANO`);
+    const price = await dat.json();
 
     const embed = new MessageEmbed()
-      .setTitle("$eth")
-      .addField("USD: ", priceUSD.amount)
-      .addField("BTC:", priceBTC.amount)
+      .setTitle("$nano")
+      .addField("USD: ", price.data.rates.USD)
+      .addField("BTC:", price.data.rates.BTC)
       .setColor(colors[colorIndex])
-      .setImage("https://ethereum.org/static/a110735dade3f354a46fc2446cd52476/0ee04/eth-home-icon.png")
+      .setImage("https://nano.org/apple-touch-icon.png")
       .setFooter("made with <3 by meow");
 
     await message.channel.send(embed);
