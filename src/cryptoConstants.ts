@@ -1,3 +1,4 @@
+// Sorry..
 export const TYPES : string[] =
   [
     "ZOC",

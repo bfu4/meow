@@ -4,6 +4,7 @@ import {Message} from "discord.js";
  * The generic interface for a command with this template
  */
 export interface Command {
+
   /**
    * A short description of what this command does. It is shown on the help menu
    */
@@ -23,6 +24,12 @@ export interface Command {
    * Aliases for this command. The first item will be the command that shows up in the help menu
    */
   aliases: string[];
+
+  /**
+   * Used for a dynamic alias, if there are no aliases. Typically used in the context where the command is DYNAMIC.
+   * @see {cryptoCommand}
+   */
+  dynamicAlias?: string;
 
   /**
    * Executor for this command

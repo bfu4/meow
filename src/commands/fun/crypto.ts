@@ -1,13 +1,14 @@
 import {Command} from "../../types/command";
 import {Message, MessageEmbed} from "discord.js";
-import {colors} from "./kitty";
 import fetch from "node-fetch";
 import {getCryptoFromString} from "../../types/crypto";
+import {colors} from "../util/embedDecor";
 
 export const cryptoCommand : Command = {
 
+  dynamicAlias: "${ticker}",
   aliases: [],
-  description: "eth price",
+  description: "get price of a given crypto currency ticker!",
   inhibitors: [],
 
   async run(message : Message) {

@@ -1,6 +1,6 @@
 import {Command} from "../../types/command";
 import {Message, MessageEmbed} from "discord.js";
-import {colors, reactions} from "./kitty";
+import {colors, reactions} from "../util/embedDecor";
 
 export const makeCat : Command = {
 
@@ -11,6 +11,11 @@ export const makeCat : Command = {
   async run(message : Message) {
 
     const server = message.guild;
+
+    if (message.mentions.users.size < 1) {
+      await message.reply("you did not mention who you were going to make a cat! =^w^=");
+      return;
+    }
 
     if (!server) {
       await message.reply("you are not in a server!");
