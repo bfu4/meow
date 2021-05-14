@@ -1,8 +1,9 @@
 import {Command} from "../../types/command";
-import {Message, MessageEmbed} from "discord.js";
+import {Message} from "discord.js";
 import fetch from "node-fetch";
-import {getCryptoFromString} from "../../types/crypto";
+import {getCryptoFromString, Crypto} from "../../types/crypto";
 import {colors} from "../util/embedDecor";
+import {EmbedBuilder} from "../util/embedBuilder";
 
 export const cryptoCommand: Command = {
 
@@ -20,15 +21,14 @@ export const cryptoCommand: Command = {
 
     const colorIndex = Math.floor(Math.random() * colors.length);
 
-    const embed = new MessageEmbed()
+    await new EmbedBuilder()
       .setTitle(`$${data.symbol}`)
-      .addField("USD: ", data.market_data.current_price.usd)
-      .addField("BTC:", data.market_data.current_price.btc)
+      .addField({name: "USD: ", value: data.market_data.current_price.usd})
+      .addField({name: "BTC:", value: data.market_data.current_price.btc})
       .setColor(colors[colorIndex])
       .setImage(data.image.thumb)
-      .setFooter("made with <3 by meow");
-
-    await message.channel.send(embed);
+      .setFooter("made with <3 by meow")
+      .sendTo(message.channel);
   }
 
 };

@@ -1,10 +1,8 @@
 import {MeowColor, MeowReaction} from "./embedDecor";
 import {
-  Channel,
   DMChannel,
-  EmbedField,
+  EmbedFieldData,
   EmojiResolvable,
-  GuildChannel,
   MessageEmbed,
   NewsChannel,
   TextChannel
@@ -85,7 +83,7 @@ export class EmbedBuilder {
    * Add fields
    * @param fields
    */
-  addFields(...fields: EmbedField[]): EmbedBuilder {
+  addFields(...fields: EmbedFieldData[]): EmbedBuilder {
     fields.forEach((field) => this.addField(field));
     return this;
   }
@@ -94,7 +92,7 @@ export class EmbedBuilder {
    * Add a field
    */
   // eslint-disable-next-line
-  addField(field: EmbedField): EmbedBuilder {
+  addField(field: EmbedFieldData): EmbedBuilder {
     if (!this.fields) this.fields = [];
     this.fields.push(field);
     return this;
