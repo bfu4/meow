@@ -4,17 +4,17 @@ import fetch from "node-fetch";
 import {colors, reactions} from "../util/embedDecor";
 import {EmbedBuilder} from "../util/embedBuilder";
 
-const titles = [ "meow!", "mew", "a wild kitty has appeared!", ".w." ];
+const titles = ["meow!", "mew", "a wild kitty has appeared!", ".w."];
 
-export const kitty : Command = {
+export const kitty: Command = {
 
-  aliases: [ "meow", "m" ],
+  aliases: ["meow", "m"],
   description: "send a kitty :3",
   inhibitors: [],
 
-  async run(message : Message) {
+  async run(message: Message) {
     const titleIndex = Math.floor(Math.random() * titles.length);
-    const colorIndex = Math.floor(Math.random() * colors.length)
+    const colorIndex = Math.floor(Math.random() * colors.length);
     const fetched = await fetch("https://aws.random.cat/meow");
     const res = await fetched.json();
 
@@ -27,4 +27,4 @@ export const kitty : Command = {
       .sendTo(message.channel);
   }
 
-}
+};

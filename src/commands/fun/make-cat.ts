@@ -2,13 +2,13 @@ import {Command} from "../../types/command";
 import {Message, MessageEmbed} from "discord.js";
 import {colors, reactions} from "../util/embedDecor";
 
-export const makeCat : Command = {
+export const makeCat: Command = {
 
-  aliases: [ "mc", "kitty" ],
+  aliases: ["mc", "kitty"],
   description: "make someone a cat!",
   inhibitors: [],
 
-  async run(message : Message) {
+  async run(message: Message) {
 
     const server = message.guild;
 
@@ -24,13 +24,13 @@ export const makeCat : Command = {
 
     const user = message.mentions.users.array()[0];
     if (!user) {
-      await message.reply("unknown user" + user[0] + " :(")
+      await message.reply("unknown user" + user[0] + " :(");
       return;
     }
 
     let role = server.roles.cache.find(({name}) => name === "cat");
 
-    const colorIndex = Math.floor(Math.random() * colors.length)
+    const colorIndex = Math.floor(Math.random() * colors.length);
 
     if (!role) {
       role = await server.roles.create({
@@ -42,7 +42,7 @@ export const makeCat : Command = {
     const gu = server.member(user);
 
     if (!gu) {
-      await message.reply("unknown user" + gu + " :(")
+      await message.reply("unknown user" + gu + " :(");
       return;
     }
 
@@ -53,7 +53,7 @@ export const makeCat : Command = {
       embed
         .addField(user.username, "is already a cat!")
         .setImage(user.avatarURL({size: 2048}) || "default")
-        .setFooter("meoww!!!")
+        .setFooter("meoww!!!");
     } else {
       embed
         .addField(user.username, "has been made a cat!")
@@ -72,4 +72,4 @@ export const makeCat : Command = {
     reactions.forEach((reaction) => msg.react(reaction).catch(() => null));
   }
 
-}
+};

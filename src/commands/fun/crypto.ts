@@ -4,21 +4,21 @@ import fetch from "node-fetch";
 import {getCryptoFromString} from "../../types/crypto";
 import {colors} from "../util/embedDecor";
 
-export const cryptoCommand : Command = {
+export const cryptoCommand: Command = {
 
   dynamicAlias: "${ticker}",
   aliases: [],
   description: "get price of a given crypto currency ticker!",
   inhibitors: [],
 
-  async run(message : Message) {
+  async run(message: Message) {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const crypto : Crypto = getCryptoFromString(message.content.substring(1).toUpperCase());
+    const crypto: Crypto = getCryptoFromString(message.content.substring(1).toUpperCase());
     const data = await geckoFetch(crypto);
 
-    const colorIndex = Math.floor(Math.random() * colors.length)
+    const colorIndex = Math.floor(Math.random() * colors.length);
 
     const embed = new MessageEmbed()
       .setTitle(`$${data.symbol}`)
@@ -31,7 +31,7 @@ export const cryptoCommand : Command = {
     await message.channel.send(embed);
   }
 
-}
+};
 
 async function geckoFetch(c: Crypto) {
   const identifier = await resolveId(c);
