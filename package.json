@@ -35,7 +35,7 @@
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node .",
     "lint": "eslint .",
-    "services:up": "docker-compose -f docker-compose.dev.yml up -d&&yarn migrate",
+    "services:up": "docker-compose -f docker-compose.dev.yml up -d",
     "services:down": "docker-compose -f docker-compose.dev.yml down",
     "services:start": "docker-compose -f docker-compose.dev.yml start",
     "services:stop": "docker-compose -f docker-compose.dev.yml stop",
