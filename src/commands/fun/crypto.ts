@@ -6,14 +6,12 @@ import {colors} from "../util/embedDecor";
 import {EmbedBuilder} from "../util/embedBuilder";
 
 export const cryptoCommand: Command = {
-
   dynamicAlias: "${ticker}",
   aliases: [],
   description: "get price of a given crypto currency ticker!",
   inhibitors: [],
 
   async run(message: Message) {
-
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const crypto: Crypto = getCryptoFromString(message.content.substring(1).toUpperCase());
@@ -29,13 +27,14 @@ export const cryptoCommand: Command = {
       .setImage(data.image.thumb)
       .setFooter("made with <3 by meow")
       .sendTo(message.channel);
-  }
-
+  },
 };
 
 async function geckoFetch(c: Crypto) {
   const identifier = await resolveId(c);
-  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${identifier.id}?tickers=true&market_data=true`);
+  const res = await fetch(
+    `https://api.coingecko.com/api/v3/coins/${identifier.id}?tickers=true&market_data=true`
+  );
   return res.json();
 }
 
@@ -44,4 +43,3 @@ async function resolveId(c: Crypto) {
   const data = await res.json();
   return data.find((el: any) => el.symbol.toUpperCase() === c);
 }
-

@@ -7,7 +7,6 @@ import {EmbedBuilder} from "../util/embedBuilder";
 const titles = ["meow!", "mew", "a wild kitty has appeared!", ".w."];
 
 export const kitty: Command = {
-
   aliases: ["meow", "m"],
   description: "send a kitty :3",
   inhibitors: [],
@@ -25,6 +24,5 @@ export const kitty: Command = {
       .setFooter("made with <3 by meow")
       .addReactions(...reactions)
       .sendTo(message.channel);
-  }
-
+  },
 };

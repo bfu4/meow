@@ -2,10 +2,9 @@ import {Message, User} from "discord.js";
 
 const MENTION_PREFIX = "<@!";
 
-type MappedUser = {user: User, parsed: string};
+type MappedUser = {user: User; parsed: string};
 
 export class Mentions {
-
   /**
    * Sanitize a message
    * @param message
@@ -19,7 +18,7 @@ export class Mentions {
       return sanitized;
     }
 
-    mentions.forEach((id) => {
+    mentions.forEach(id => {
       sanitized = this.sanitizeUser(sanitized, this.retrieveFromMap(id, mapped as MappedUser[])!);
     });
     return sanitized;
@@ -32,8 +31,8 @@ export class Mentions {
    * @private
    */
   private static map(users: User[], parsed: string[]): (MappedUser | undefined)[] {
-    return parsed.map((value) => {
-      const user = users.find((u) => {
+    return parsed.map(value => {
+      const user = users.find(u => {
         if (value === u.id) {
           return u;
         }
@@ -43,7 +42,7 @@ export class Mentions {
   }
 
   private static retrieveFromMap(id: string, map: MappedUser[]): User | null {
-    const mappedUser =  map.find((k) => k.parsed === id);
+    const mappedUser = map.find(k => k.parsed === id);
     if (!mappedUser) return null;
     return mappedUser.user;
   }
@@ -82,11 +81,10 @@ export class Mentions {
    */
   private static sanitizeUser(sanitizeString: string, user: User): string {
     if (this.isSanitizable(sanitizeString, user.toString())) {
-      return sanitizeString
-        .replace(
-          `${MENTION_PREFIX}${user.toString().split("@")[1]}`,
-          this.trimUsername(user)
-        );
+      return sanitizeString.replace(
+        `${MENTION_PREFIX}${user.toString().split("@")[1]}`,
+        this.trimUsername(user)
+      );
     }
     return sanitizeString;
   }
@@ -97,7 +95,10 @@ export class Mentions {
    * @private
    */
   private static trimUsername(user: User) {
-    return user.username.split("\u0020").filter(c => c.trim().length).join("\u0020");
+    return user.username
+      .split("\u0020")
+      .filter(c => c.trim().length)
+      .join("\u0020");
   }
 
   /**
@@ -111,5 +112,4 @@ export class Mentions {
     if (userStringSplit.length < 2) return false;
     return sanitizerString.indexOf(`${MENTION_PREFIX}${userStringSplit[1]}`) !== -1;
   }
-
 }

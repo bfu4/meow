@@ -4,7 +4,6 @@ import {Message} from "discord.js";
  * The generic interface for a command with this template
  */
 export interface Command {
-
   /**
    * A short description of what this command does. It is shown on the help menu
    */

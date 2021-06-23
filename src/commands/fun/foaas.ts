@@ -6,7 +6,6 @@ import {colors, reactions} from "../util/embedDecor";
 import {Mentions} from "../util/text";
 
 export const foaas: Command = {
-
   aliases: ["foaas", "fo"],
   description: "foaas.com",
   inhibitors: [],
@@ -17,7 +16,9 @@ export const foaas: Command = {
 
     let sanitized = Mentions.sanitize(message);
 
-    sanitized = sanitized.startsWith(this.aliases[0]) ? sanitized.split(this.aliases[0])[1] : sanitized.split(this.aliases[1])[1];
+    sanitized = sanitized.startsWith(this.aliases[0])
+      ? sanitized.split(this.aliases[0])[1]
+      : sanitized.split(this.aliases[1])[1];
 
     if (sanitized.length < 1 || sanitized.startsWith("help")) {
       embed
@@ -31,18 +32,24 @@ export const foaas: Command = {
 
     const args = sanitized.split("\u0020");
 
-    const fetched = await fetch(`https://foaas.com/${args[1]}` + "/" + (args[2] ? args[2] : "") + "/" + (args[3] ? args[3] : ""), {
-      headers: {
-        "Accept": "application/json"
+    const fetched = await fetch(
+      `https://foaas.com/${args[1]}` +
+        "/" +
+        (args[2] ? args[2] : "") +
+        "/" +
+        (args[3] ? args[3] : ""),
+      {
+        headers: {
+          Accept: "application/json",
+        },
       }
-    });
-
+    );
 
     if (fetched.status === 622) {
       await embed
         .setTitle("fucks sake")
         .setColor(colors[colorIndex])
-        .setDescription("couldn't you give a valid request? wtf is: \"" + sanitized.trim() + "\"")
+        .setDescription("couldn't you give a valid request? wtf is: \"" + sanitized.trim() + '"')
         .setFooter("https://foaas.com <3 with meow")
         .setImage("https://geekologie.com/2016/02/17/angry-cat-5.jpg")
         .addReaction("😾")
@@ -58,6 +65,5 @@ export const foaas: Command = {
       .setImage("https://geekologie.com/2016/02/17/angry-cat-5.jpg")
       .addReactions(...reactions)
       .sendTo(message.channel);
-  }
-
+  },
 };

@@ -3,13 +3,11 @@ import {Message, MessageEmbed} from "discord.js";
 import {colors, reactions} from "../util/embedDecor";
 
 export const makeCat: Command = {
-
   aliases: ["mc", "kitty"],
   description: "make someone a cat!",
   inhibitors: [],
 
   async run(message: Message) {
-
     const server = message.guild;
 
     if (message.mentions.users.size < 1) {
@@ -34,8 +32,7 @@ export const makeCat: Command = {
 
     if (!role) {
       role = await server.roles.create({
-        data:
-          {name: "cat", color: colors[colorIndex], mentionable: true}
+        data: {name: "cat", color: colors[colorIndex], mentionable: true},
       });
     }
 
@@ -46,8 +43,7 @@ export const makeCat: Command = {
       return;
     }
 
-    const embed = new MessageEmbed()
-      .setColor(colors[colorIndex]);
+    const embed = new MessageEmbed().setColor(colors[colorIndex]);
 
     if (gu.roles.cache.find(({name}) => name === "cat")) {
       embed
@@ -61,15 +57,14 @@ export const makeCat: Command = {
         .setFooter("uuuuuuuuuuueeeee");
 
       await gu.roles.add(role);
-
     }
 
-    const canHaveNick = ((gu.nickname !== null ? gu.nickname : gu.displayName) + "\\s(cat)").length <= 32;
-    if (canHaveNick && gu.displayName.indexOf("(cat)") === -1) await gu.setNickname("💖" + gu.displayName + " (cat)");
-
+    const canHaveNick =
+      ((gu.nickname !== null ? gu.nickname : gu.displayName) + "\\s(cat)").length <= 32;
+    if (canHaveNick && gu.displayName.indexOf("(cat)") === -1)
+      await gu.setNickname("💖" + gu.displayName + " (cat)");
 
     const msg = await message.channel.send(embed);
-    reactions.forEach((reaction) => msg.react(reaction).catch(() => null));
-  }
-
+    reactions.forEach(reaction => msg.react(reaction).catch(() => null));
+  },
 };

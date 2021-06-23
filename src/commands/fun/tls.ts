@@ -14,7 +14,6 @@ const images = [
 ];
 
 export const tls: Command = {
-
   aliases: ["tls", "t"],
   description: "tls memes.",
   inhibitors: [],
@@ -25,25 +24,23 @@ export const tls: Command = {
     const embed = new EmbedBuilder().setColor(colors[colorIndex]);
     let file;
 
-    if (args.length  < 2) {
+    if (args.length < 2) {
       file = images[Math.floor(Math.random() * images.length)];
     } else if (args[1] === "keys" || args[1] === "help") {
-      const fields = images.map((image) => {
-        return { name: image.name, value: `key: ${image.key}`, inline: false }
-      })
+      const fields = images.map(image => {
+        return {name: image.name, value: `key: ${image.key}`, inline: false};
+      });
       await embed
         .setTitle("tls index")
         .addFields(...fields)
         .sendTo(message.channel);
       return;
     } else {
-      file = images[images.findIndex((value) => value.key === args[1])];
+      file = images[images.findIndex(value => value.key === args[1])];
     }
 
     if (file === undefined) {
-      await embed
-        .setTitle("Invalid key!")
-        .sendTo(message.channel);
+      await embed.setTitle("Invalid key!").sendTo(message.channel);
       return;
     }
 
@@ -53,6 +50,5 @@ export const tls: Command = {
       .setFooter("made with <3 by meow")
       .addReactions(...reactions)
       .sendTo(message.channel);
-  }
-
+  },
 };

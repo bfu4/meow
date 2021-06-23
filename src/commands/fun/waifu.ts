@@ -7,7 +7,6 @@ import {colors, reactions} from "../util/embedDecor";
 const titles = ["=^w^=!", "waifu", "uwu", ".w."];
 
 export const waifu: Command = {
-
   aliases: ["waifu", "w"],
   description: "nekoo!",
   inhibitors: [],
@@ -25,6 +24,5 @@ export const waifu: Command = {
       .setFooter("made with <3 by meow")
       .addReactions(...reactions)
       .sendTo(message.channel);
-  }
-
+  },
 };

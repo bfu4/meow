@@ -5,14 +5,13 @@ import {
   EmojiResolvable,
   MessageEmbed,
   NewsChannel,
-  TextChannel
+  TextChannel,
 } from "discord.js";
 
 /**
  * Base for building embeds
  */
 export class EmbedBuilder {
-
   title?: string;
   description?: string;
   url?: string;
@@ -20,7 +19,7 @@ export class EmbedBuilder {
   reactions?: EmojiResolvable[];
   image?: string;
   footer?: string;
-  fields?: {name: any, value: any, inline?: boolean | undefined}[];
+  fields?: {name: any; value: any; inline?: boolean | undefined}[];
 
   constructor() {
     this.footer = "made with <3 by meow";
@@ -35,7 +34,6 @@ export class EmbedBuilder {
     this.title = title;
     return this;
   }
-
 
   /**
    * Set the description
@@ -75,7 +73,7 @@ export class EmbedBuilder {
   }
 
   addReactions(...reactions: MeowReaction[]): EmbedBuilder {
-    reactions.forEach((reaction) => this.addReaction(reaction));
+    reactions.forEach(reaction => this.addReaction(reaction));
     return this;
   }
 
@@ -84,7 +82,7 @@ export class EmbedBuilder {
    * @param fields
    */
   addFields(...fields: EmbedFieldData[]): EmbedBuilder {
-    fields.forEach((field) => this.addField(field));
+    fields.forEach(field => this.addField(field));
     return this;
   }
 
@@ -120,14 +118,12 @@ export class EmbedBuilder {
    * Build the embed
    */
   build(): MessageEmbed {
-    const embed = new MessageEmbed()
-      .setFooter(this.footer)
-      .setColor(this.color)
-    if (this.title) embed.setTitle(this.title)
-    if (this.description) embed.setDescription(this.description)
+    const embed = new MessageEmbed().setFooter(this.footer).setColor(this.color);
+    if (this.title) embed.setTitle(this.title);
+    if (this.description) embed.setDescription(this.description);
     if (this.url) embed.setURL(this.url);
     if (this.image) embed.setImage(this.image);
-    if (this.fields) embed.addFields(...this.fields)
+    if (this.fields) embed.addFields(...this.fields);
     return embed;
   }
 
@@ -144,5 +140,4 @@ export class EmbedBuilder {
       }
     }
   }
-
 }

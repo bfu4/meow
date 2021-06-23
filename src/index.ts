@@ -22,10 +22,12 @@ if (process.env.DISCORD_TOKEN) {
   client.on("message", async message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
-    if (message.content.startsWith(prefix) && message.content.substr(prefix.length).charAt(0) == " ") {
+    if (
+      message.content.startsWith(prefix) &&
+      message.content.substr(prefix.length).charAt(0) == " "
+    ) {
       return;
     } else {
-
       const [rawCommandName, ...args] = message.content.replace(prefix, "").split(" ");
       const commandName = rawCommandName.toLowerCase();
 
@@ -53,7 +55,7 @@ if (process.env.DISCORD_TOKEN) {
           return {
             name: prefix + (name ? name : command.dynamicAlias ? command.dynamicAlias : ""),
             value: command.description,
-            inline: false
+            inline: false,
           };
         });
 
@@ -74,7 +76,9 @@ if (process.env.DISCORD_TOKEN) {
         }
       }
 
-      const inhibitors = Array.isArray(command.inhibitors) ? command.inhibitors : [command.inhibitors];
+      const inhibitors = Array.isArray(command.inhibitors)
+        ? command.inhibitors
+        : [command.inhibitors];
 
       try {
         for (const inhibitor of inhibitors) {
@@ -90,4 +94,3 @@ if (process.env.DISCORD_TOKEN) {
 } else {
   signale.error("Missing discord bot token, cannot log in!");
 }
-
