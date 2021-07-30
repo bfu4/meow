@@ -14,7 +14,7 @@ export const kitty: Command = {
   async run(message: Message) {
     const titleIndex = Math.floor(Math.random() * titles.length);
     const colorIndex = Math.floor(Math.random() * colors.length);
-    const fetched = await fetch("https://aws.random.cat/meow");
+    const fetched = await fetch("http://aws.random.cat/meow");
     const res = await fetched.json();
 
     await new EmbedBuilder()
