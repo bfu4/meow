@@ -18,12 +18,14 @@ export const kitty: Command = {
       // stupid fix, endpoint broke.
       method: "GET",
       headers: {
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept": "*/*",
+        "Host": "aws.random.cat",
         "Connection": "keep-alive",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0"
+        "User-Agent": "curl/7.58.0"
       },
     });
     if (fetched.status !== 200) {
+      console.log(fetched.statusText)
       await new EmbedBuilder()
         .setTitle("error :<")
         .setColor(colors[0])
