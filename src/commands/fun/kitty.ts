@@ -21,17 +21,16 @@ export const kitty: Command = {
         "Accept": "*/*",
         "Host": "aws.random.cat",
         "Connection": "keep-alive",
-        "User-Agent": "curl/7.58.0"
+        "User-Agent": "curl/7.58.0",
       },
     });
     if (fetched.status !== 200) {
-      console.log(fetched.statusText)
       await new EmbedBuilder()
         .setTitle("error :<")
         .setColor(colors[0])
         .setDescription("an api error has occurred")
-        .sendTo(message.channel)
-      return
+        .sendTo(message.channel);
+      return;
     }
     const res = await fetched.json();
 

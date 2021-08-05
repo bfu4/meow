@@ -5,14 +5,14 @@ import {aliases, commands} from "./commands";
 import {StandardEmbed} from "./structs/standard-embed";
 import {isDev} from "./constants";
 import signale from "signale";
-import {Crypto, getCryptoFromString} from "./types/crypto";
+import {getCryptoFromString} from "./types/crypto";
 import {cryptoCommand} from "./commands/fun/crypto";
 
 if (process.env.DISCORD_TOKEN) {
   const client = new Client();
   const prefix = process.env.PREFIX || "^";
 
-  client.login(process.env.DISCORD_TOKEN);
+  void client.login(process.env.DISCORD_TOKEN);
 
   client.on("ready", async () => {
     signale.info("Environment:", isDev ? "dev" : "prod");
@@ -67,7 +67,7 @@ if (process.env.DISCORD_TOKEN) {
       const command = aliases.get(commandName);
 
       if (!command) {
-        const crypto: Crypto = getCryptoFromString(commandName);
+        const crypto = getCryptoFromString(commandName);
         if (!crypto || crypto.length === 0) {
           return message.reply("⚠ Unknown Command");
         } else {

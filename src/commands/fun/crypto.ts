@@ -12,10 +12,17 @@ export const cryptoCommand: Command = {
   inhibitors: [],
 
   async run(message: Message) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const crypto: Crypto = getCryptoFromString(message.content.substring(1).toUpperCase());
-    const data = await geckoFetch(crypto);
+    const crypto = message.content.substring(1).toUpperCase();
+    const found = getCryptoFromString(crypto);
+    if (!found) {
+      await new EmbedBuilder()
+        .setTitle("error :<")
+        .setColor(colors[0])
+        .setDescription(`currency ${crypto} not found.`)
+        .sendTo(message.channel);
+      return;
+    }
+    const data = await geckoFetch(found);
 
     const colorIndex = Math.floor(Math.random() * colors.length);
 
